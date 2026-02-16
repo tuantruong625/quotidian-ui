@@ -1,0 +1,12 @@
+{
+  "name": "@quotidian-ui/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens for Quotidian UI",
+  "main": "build/js/tokens.js",
+  "types": "build/js/tokens.d.ts",
+  "files": ["build"],
+  "scripts": {
+    "build": "echo 'TODO: configure style-dictionary'",
+    "clean": "rm -rf build"
+  }
+}

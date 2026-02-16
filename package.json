@@ -1,0 +1,18 @@
+{
+  "name": "quotidian-ui",
+  "private": true,
+  "version": "0.0.0",
+  "description": "The everyday design system — built with React, TypeScript, CSS Modules, and React Aria",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "typescript": "^5.5.0"
+  },
+  "packageManager": "pnpm@10.0.0"
+}
