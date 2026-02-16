@@ -1,0 +1,29 @@
+{
+  "font": {
+    "family": {
+      "sans": { "$value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", "$type": "fontFamily" },
+      "mono": { "$value": "'JetBrains Mono', 'Fira Code', Consolas, monospace", "$type": "fontFamily" }
+    },
+    "weight": {
+      "regular":  { "$value": "400", "$type": "fontWeight" },
+      "medium":   { "$value": "500", "$type": "fontWeight" },
+      "semibold": { "$value": "600", "$type": "fontWeight" },
+      "bold":     { "$value": "700", "$type": "fontWeight" }
+    },
+    "size": {
+      "xs":  { "$value": "0.75rem", "$type": "fontSize" },
+      "sm":  { "$value": "0.875rem", "$type": "fontSize" },
+      "md":  { "$value": "1rem", "$type": "fontSize" },
+      "lg":  { "$value": "1.125rem", "$type": "fontSize" },
+      "xl":  { "$value": "1.25rem", "$type": "fontSize" },
+      "2xl": { "$value": "1.5rem", "$type": "fontSize" },
+      "3xl": { "$value": "1.875rem", "$type": "fontSize" },
+      "4xl": { "$value": "2.25rem", "$type": "fontSize" }
+    },
+    "lineHeight": {
+      "tight":  { "$value": "1.25", "$type": "lineHeight" },
+      "normal": { "$value": "1.5", "$type": "lineHeight" },
+      "loose":  { "$value": "1.75", "$type": "lineHeight" }
+    }
+  }
+}

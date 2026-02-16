@@ -4,9 +4,14 @@
   "description": "Design tokens for Quotidian UI",
   "main": "build/js/tokens.js",
   "types": "build/js/tokens.d.ts",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "scripts": {
-    "build": "echo 'TODO: configure style-dictionary'",
+    "build": "node build-tokens.mjs",
     "clean": "rm -rf build"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.3.1"
   }
 }
