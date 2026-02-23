@@ -3,3 +3,6 @@ dist
 build
 .turbo
 *.tsbuildinfo
+
+*storybook.log
+storybook-static
