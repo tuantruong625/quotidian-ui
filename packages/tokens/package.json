@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "node build-tokens.mjs",
-    "clean": "rm -rf build"
+    "clean": "rm -rf build",
+    "build-tokens": "pnpm turbo build --filter @quotidian-ui/tokens"
   },
   "devDependencies": {
     "style-dictionary": "^5.3.1"
