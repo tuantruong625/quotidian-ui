@@ -1,0 +1,99 @@
+.root {
+  padding: 0.50rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  transition: box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.root:focus-visible {
+  outline: none;
+  box-shadow:
+  0 0 0 2px var(--color-semantic-border-focus),
+  0 0 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.sm {
+  padding: 0.25rem 1rem;
+}
+
+.md {
+  padding: 0.50rem 1rem;
+}
+
+.lg {
+  padding: 0.75rem 1rem;
+}
+
+.helperText {
+  padding: 0;
+  margin: 0;
+}
+
+.spinner {
+  position: absolute;
+  width: 0.5em;
+  height: 0.5em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 1000ms linear infinite;
+  color: var(--color-primitive-forest-400);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 0.25rem;
+}
+
+.labelText {
+  padding-left: 0.5rem;
+}
+
+.isRequired {
+  color: var(--color-primitive-red-500);
+}
+
+.helperText {
+  padding-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-primitive-gray-600);
+}
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconStart,
+.iconEnd {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.iconStart {
+  left: 0.5rem;
+}
+
+.iconEnd {
+  right: 1rem;
+}
+
+.hasStartIcon {
+  padding-left: 2rem;
+}
+
+.hasEndIcon {
+  padding-right: 2.5rem;
+}

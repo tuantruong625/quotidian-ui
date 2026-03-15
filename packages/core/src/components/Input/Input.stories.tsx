@@ -22,5 +22,9 @@ export const Default: Story = {
 		size: 'md',
 		placeholder: 'Placeholder',
 		label: 'Text Input',
+		startIcon: '🏀',
+		isLoading: true,
+		helperText: 'This is a text input',
+		isRequired: true,
 	},
 };
