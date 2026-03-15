@@ -12,10 +12,10 @@ const sd = new StyleDictionary({
           destination: 'variables.css',
           format: 'css/variables',
           options: {
-            outputReferences: true
-          }
-        }
-      ]
+            outputReferences: true,
+          },
+        },
+      ],
     },
     js: {
       transformGroup: 'js',
@@ -23,15 +23,15 @@ const sd = new StyleDictionary({
       files: [
         {
           destination: 'tokens.js',
-          format: 'javascript/es6'
+          format: 'javascript/es6',
         },
         {
           destination: 'tokens.d.ts',
-          format: 'typescript/es6-declarations'
-        }
-      ]
-    }
-  }
+          format: 'typescript/es6-declarations',
+        },
+      ],
+    },
+  },
 });
 
 await sd.buildAllPlatforms();

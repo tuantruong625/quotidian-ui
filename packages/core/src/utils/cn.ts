@@ -9,11 +9,11 @@ export const cn = (...inputs: (string | undefined | null | false | Record<string
     } else if (typeof input === 'object') {
       for (const [key, value] of Object.entries(input)) {
         if (value) {
-          classes.push(key)
+          classes.push(key);
         }
       }
     }
   }
 
   return classes.join(' ');
-}
+};

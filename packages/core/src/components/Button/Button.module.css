@@ -8,14 +8,19 @@
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
   outline: none;
   text-decoration: none;
   line-height: 1;
 }
 
 .root:focus-visible {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--color-semantic-border-focus);
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px var(--color-semantic-border-focus);
 }
 
 .root:disabled,

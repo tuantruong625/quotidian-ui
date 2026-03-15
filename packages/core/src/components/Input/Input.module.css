@@ -1,15 +1,17 @@
 .root {
-  padding: 0.50rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  transition: box-shadow 150ms ease, border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
 }
 
 .root:focus-visible {
   outline: none;
   box-shadow:
-  0 0 0 2px var(--color-semantic-border-focus),
-  0 0 0 8px rgba(0, 0, 0, 0.04);
+    0 0 0 2px var(--color-semantic-border-focus),
+    0 0 0 8px rgba(0, 0, 0, 0.04);
 }
 
 .sm {
@@ -17,7 +19,7 @@
 }
 
 .md {
-  padding: 0.50rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .lg {

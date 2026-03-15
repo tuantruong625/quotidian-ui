@@ -14,7 +14,7 @@
     "dev": "vite build --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "echo 'TODO: configure eslint'",
+    "lint": "eslint src/",
     "clean": "rm -rf dist"
   },
   "dependencies": {
