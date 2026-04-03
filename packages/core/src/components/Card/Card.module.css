@@ -1,0 +1,108 @@
+/* Root */
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-sans);
+  color: var(--color-semantic-text-primary);
+  border-radius: var(--radius-xl);
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Variants */
+.elevated {
+  background: rgba(253, 252, 249, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--elevation-1);
+  border: none;
+}
+
+.outlined {
+  background: var(--color-semantic-bg-primary);
+  box-shadow: var(--elevation-0);
+  border: 1.5px solid var(--color-primitive-neutral-200);
+}
+
+.filled {
+  background: var(--color-semantic-bg-secondary);
+  box-shadow: var(--elevation-0);
+  border: none;
+}
+
+/* Padding */
+.paddingNone {
+  padding: var(--space-0);
+}
+
+.paddingSm {
+  padding: var(--space-3);
+}
+
+.paddingMd {
+  padding: var(--space-4);
+}
+
+.paddingLg {
+  padding: var(--space-6);
+}
+
+/* Interactive */
+.interactive {
+  cursor: pointer;
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease,
+    background 200ms ease;
+}
+
+.interactive:hover:not(.disabled) {
+  box-shadow: var(--elevation-2);
+  transform: scale(1.01);
+  background: rgba(253, 252, 249, 0.92);
+}
+
+.interactive:active:not(.disabled) {
+  transform: scale(0.99);
+  box-shadow: var(--elevation-1);
+}
+
+/* Interactive as button/a element — reset UA styles */
+button.root,
+a.root {
+  border: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+button.root:focus-visible,
+a.root:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-semantic-bg-primary),
+    0 0 0 4px var(--color-semantic-border-focus);
+}
+
+/* Disabled */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Subcomponents */
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.body {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
