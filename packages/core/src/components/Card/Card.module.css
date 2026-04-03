@@ -12,7 +12,7 @@
 
 /* Variants */
 .elevated {
-  background: rgba(253, 252, 249, 0.75);
+  background: color-mix(in srgb, var(--color-semantic-bg-primary) 80%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: var(--elevation-1);
@@ -22,7 +22,7 @@
 .outlined {
   background: var(--color-semantic-bg-primary);
   box-shadow: var(--elevation-0);
-  border: 1.5px solid var(--color-primitive-neutral-200);
+  border: 1.5px solid var(--color-semantic-border-default);
 }
 
 .filled {
@@ -60,7 +60,7 @@
 .interactive:hover:not(.disabled) {
   box-shadow: var(--elevation-2);
   transform: scale(1.01);
-  background: rgba(253, 252, 249, 0.92);
+  background: color-mix(in srgb, var(--color-semantic-bg-primary) 95%, transparent);
 }
 
 .interactive:active:not(.disabled) {

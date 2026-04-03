@@ -19,7 +19,7 @@
 
 .root:focus-visible {
   box-shadow:
-    0 0 0 2px #ffffff,
+    0 0 0 2px var(--color-semantic-bg-primary),
     0 0 0 4px var(--color-semantic-border-focus);
 }
 
@@ -32,7 +32,7 @@
 /* Variants */
 .primary {
   background: var(--color-semantic-action-primary-default);
-  color: var(--color-primitive-white);
+  color: var(--color-semantic-text-inverse);
 }
 
 .primary:hover:not(:disabled) {
@@ -99,7 +99,7 @@
   border-right-color: transparent;
   border-radius: var(--radius-full);
   animation: spin 1000ms linear infinite;
-  color: var(--color-primitive-white);
+  color: var(--color-semantic-text-inverse);
 }
 
 .loading.secondary .spinner,

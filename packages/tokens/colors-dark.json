@@ -1,0 +1,84 @@
+{
+  "color": {
+    "semantic": {
+      "bg": {
+        "primary": {
+          "$value": "{color.primitive.ink.900}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{color.primitive.ink.800}",
+          "$type": "color"
+        },
+        "inverse": { "$value": "{color.primitive.neutral.100}", "$type": "color" }
+      },
+
+      "text": {
+        "primary": { "$value": "{color.primitive.neutral.100}", "$type": "color" },
+        "secondary": {
+          "$value": "{color.primitive.neutral.400}",
+          "$type": "color"
+        },
+        "inverse": {
+          "$value": "{color.primitive.ink.900}",
+          "$type": "color"
+        },
+        "brand": { "$value": "{color.primitive.stone.300}", "$type": "color" }
+      },
+
+      "border": {
+        "default": {
+          "$value": "{color.primitive.ink.600}",
+          "$type": "color"
+        },
+        "strong": {
+          "$value": "{color.primitive.ink.500}",
+          "$type": "color"
+        },
+        "focus": { "$value": "{color.primitive.neutral.300}", "$type": "color" }
+      },
+
+      "action": {
+        "primary": {
+          "default": {
+            "$value": "{color.primitive.stone.300}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{color.primitive.stone.200}",
+            "$type": "color"
+          },
+          "active": {
+            "$value": "{color.primitive.stone.400}",
+            "$type": "color"
+          },
+          "disabled": {
+            "$value": "{color.primitive.ink.600}",
+            "$type": "color"
+          }
+        },
+
+        "danger": {
+          "default": {
+            "$value": "{color.primitive.red.500}",
+            "$type": "color"
+          },
+          "hover": { "$value": "{color.primitive.red.600}", "$type": "color" }
+        }
+      },
+
+      "status": {
+        "success": {
+          "$value": "{color.primitive.green.500}",
+          "$type": "color"
+        },
+        "warning": {
+          "$value": "{color.primitive.amber.500}",
+          "$type": "color"
+        },
+        "error": { "$value": "{color.primitive.red.500}", "$type": "color" },
+        "info": { "$value": "{color.primitive.blue.500}", "$type": "color" }
+      }
+    }
+  }
+}
