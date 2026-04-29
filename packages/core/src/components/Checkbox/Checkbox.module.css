@@ -1,0 +1,52 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-semantic-text-primary);
+  cursor: pointer;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-semantic-border-default);
+  border-radius: 0.375rem;
+  background: var(--color-semantic-surface-primary);
+  color: white;
+}
+
+.checked {
+  background: var(--color-semantic-action-primary-default);
+  border-color: var(--color-semantic-action-primary-default);
+}
+
+.label {
+  user-select: none;
+}
+
+.disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.sm .box {
+  width: 1rem;
+  height: 1rem;
+}
+
+.md .box {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.lg .box {
+  width: 1.25rem;
+  height: 1.25rem;
+}

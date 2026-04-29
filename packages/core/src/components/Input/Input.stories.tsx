@@ -20,6 +20,7 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
+    id: 'input-default',
     size: 'md',
     placeholder: 'Placeholder',
     label: 'Text Input',
@@ -27,11 +28,23 @@ export const Default: Story = {
     endIcon: <Sparkles size={16} aria-hidden="true" />,
     isLoading: false,
     helperText: 'This is a text input',
+    errorMessage: 'This field is required',
     isRequired: true,
     type: 'text',
     value: '',
     onChange: () => ({}),
     defaultValue: '',
     isDisabled: false,
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    ...Default.args,
+    id: 'input-invalid',
+    isInvalid: true,
+    value: 'bad email',
+    label: 'Email',
+    type: 'email',
   },
 };

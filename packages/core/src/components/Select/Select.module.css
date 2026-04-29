@@ -1,0 +1,30 @@
+.root {
+  width: 100%;
+  border: 1px solid var(--color-semantic-border-default);
+  border-radius: 0.75rem;
+  background: var(--color-semantic-surface-primary);
+  color: var(--color-semantic-text-primary);
+}
+
+.root:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-semantic-border-focus),
+    0 0 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.root[aria-invalid='true'] {
+  border-color: var(--color-primitive-red-500);
+}
+
+.sm {
+  padding: 0.5rem 0.75rem;
+}
+
+.md {
+  padding: 0.625rem 0.875rem;
+}
+
+.lg {
+  padding: 0.75rem 1rem;
+}

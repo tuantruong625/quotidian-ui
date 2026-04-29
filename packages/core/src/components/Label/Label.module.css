@@ -1,0 +1,15 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-semantic-text-primary);
+  font-weight: 500;
+}
+
+.required {
+  color: var(--color-primitive-red-500);
+}
+
+.disabled {
+  opacity: 0.72;
+}
