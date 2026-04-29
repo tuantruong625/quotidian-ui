@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@quotidian-ui/tokens": "workspace:*",
+    "lucide-react": "^1.14.0",
     "react-aria": "^3.46.0",
     "react-stately": "^3.44.0"
   },

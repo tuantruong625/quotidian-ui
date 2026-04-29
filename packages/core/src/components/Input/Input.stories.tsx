@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Search, Sparkles } from 'lucide-react';
 import { Input } from './Input';
 
 const meta: Meta<typeof Input> = {
@@ -22,9 +23,15 @@ export const Default: Story = {
     size: 'md',
     placeholder: 'Placeholder',
     label: 'Text Input',
-    startIcon: '🏀',
-    isLoading: true,
+    startIcon: <Search size={16} aria-hidden="true" />,
+    endIcon: <Sparkles size={16} aria-hidden="true" />,
+    isLoading: false,
     helperText: 'This is a text input',
     isRequired: true,
+    type: 'text',
+    value: '',
+    onChange: () => ({}),
+    defaultValue: '',
+    isDisabled: false,
   },
 };
