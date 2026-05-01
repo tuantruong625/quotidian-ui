@@ -2,6 +2,17 @@
   "name": "@quotidian-ui/tokens",
   "version": "0.1.0",
   "description": "Design tokens for Quotidian UI",
+  "homepage": "https://github.com/tuantruong625/quotidian-ui#readme",
+  "bugs": {
+    "url": "https://github.com/tuantruong625/quotidian-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuantruong625/quotidian-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "build/js/tokens.js",
   "types": "build/js/tokens.d.ts",
   "files": [

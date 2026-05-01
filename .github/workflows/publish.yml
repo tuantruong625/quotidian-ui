@@ -1,0 +1,50 @@
+name: Publish Packages
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish tokens then core
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build tokens
+        run: pnpm --filter @quotidian-ui/tokens build
+
+      - name: Publish tokens
+        run: pnpm --filter @quotidian-ui/tokens publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build core
+        run: pnpm --filter @quotidian-ui/core build
+
+      - name: Publish core
+        run: pnpm --filter @quotidian-ui/core publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
