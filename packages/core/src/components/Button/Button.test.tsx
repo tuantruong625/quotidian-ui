@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import type { FormEvent } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { Button } from './Button';
 
@@ -60,5 +61,18 @@ describe('Button', () => {
     render(<Button className="custom">Styled</Button>);
     const button = screen.getByRole('button');
     expect(button.className).toContain('custom');
+  });
+
+  it('supports submit button type in forms', async () => {
+    const user = userEvent.setup();
+    const handleSubmit = vi.fn((event: FormEvent<HTMLFormElement>) => event.preventDefault());
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button type="submit">Save</Button>
+      </form>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    expect(handleSubmit).toHaveBeenCalledOnce();
   });
 });

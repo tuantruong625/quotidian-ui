@@ -4,7 +4,7 @@ import { cn } from '../../utils/cn';
 import { FieldWrapper } from '../FieldWrapper';
 import styles from './Textarea.module.css';
 
-export type TextareaProps = {
+export type TextareaProps = Omit<React.ComponentPropsWithoutRef<'textarea'>, 'size'> & {
   id?: string;
   label?: React.ReactNode;
   placeholder?: string;
@@ -35,10 +35,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       isRequired = false,
       isReadOnly = false,
       isInvalid = false,
+      disabled = false,
+      required = false,
+      readOnly = false,
       rows = 4,
       value,
       defaultValue,
       onChange,
+      onBlur,
+      name,
       className,
       ...rest
     },
@@ -53,17 +58,30 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const internalRef = useRef<HTMLTextAreaElement>(null);
     const ref = forwardedRef || internalRef;
 
+    const resolvedIsDisabled = isDisabled || disabled;
+    const resolvedIsRequired = isRequired || required;
+    const resolvedIsReadOnly = isReadOnly || readOnly;
+
     const { inputProps } = useTextField(
       {
         inputElementType: 'textarea',
         label,
-        isDisabled,
-        isRequired,
-        isReadOnly,
+        isDisabled: resolvedIsDisabled,
+        isRequired: resolvedIsRequired,
+        isReadOnly: resolvedIsReadOnly,
         validationState: isInvalid ? 'invalid' : 'valid',
       },
       ref as React.RefObject<HTMLTextAreaElement>,
     );
+
+    const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+      inputProps.onChange?.(event);
+      onChange?.(event);
+    };
+    const handleBlur: React.FocusEventHandler<HTMLTextAreaElement> = (event) => {
+      inputProps.onBlur?.(event);
+      onBlur?.(event);
+    };
 
     return (
       <FieldWrapper
@@ -71,9 +89,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         label={label}
         helperText={helperText}
         errorMessage={errorMessage}
-        isRequired={isRequired}
-        isDisabled={isDisabled}
-        isReadOnly={isReadOnly}
+        isRequired={resolvedIsRequired}
+        isDisabled={resolvedIsDisabled}
+        isReadOnly={resolvedIsReadOnly}
         isInvalid={isInvalid}
         size={size}
       >
@@ -82,9 +100,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...inputProps}
           id={id}
           rows={rows}
+          name={name}
           value={value}
           defaultValue={defaultValue}
-          onChange={onChange}
+          onChange={handleChange}
+          onBlur={handleBlur}
           placeholder={placeholder}
           aria-invalid={isInvalid || undefined}
           aria-describedby={describedBy}

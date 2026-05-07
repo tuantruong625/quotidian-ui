@@ -5,20 +5,36 @@ import { cn } from '../../utils/cn';
 import styles from './Checkbox.module.css';
 
 export type CheckboxProps = {
+  name?: string;
+  value?: string;
   children?: React.ReactNode;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
   isSelected?: boolean;
   defaultSelected?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
   isIndeterminate?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  onChange?: (isSelected: boolean) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onCheckedChange?: (isSelected: boolean) => void;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 };
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       children,
+      name,
+      value,
+      checked,
+      defaultChecked,
+      disabled = false,
+      readOnly = false,
+      required = false,
       isSelected,
       defaultSelected,
       isDisabled = false,
@@ -26,16 +42,32 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       isIndeterminate = false,
       size = 'md',
       onChange,
+      onCheckedChange,
+      onBlur,
     },
     forwardedRef,
   ) => {
-    const state = useToggleState({ isSelected, defaultSelected, isReadOnly, isDisabled, onChange });
+    const resolvedIsSelected = checked ?? isSelected;
+    const resolvedDefaultSelected = defaultChecked ?? defaultSelected;
+    const resolvedIsDisabled = isDisabled || disabled;
+    const resolvedIsReadOnly = isReadOnly || readOnly;
+
+    const state = useToggleState({
+      isSelected: resolvedIsSelected,
+      defaultSelected: resolvedDefaultSelected,
+      isReadOnly: resolvedIsReadOnly,
+      isDisabled: resolvedIsDisabled,
+      onChange: onCheckedChange,
+    });
     const internalRef = useRef<HTMLInputElement>(null);
     const ref = forwardedRef || internalRef;
     const { inputProps } = useCheckbox(
       {
-        isDisabled,
-        isReadOnly,
+        name,
+        value,
+        isDisabled: resolvedIsDisabled,
+        isReadOnly: resolvedIsReadOnly,
+        isRequired: required,
         isIndeterminate,
         children: typeof children === 'string' ? children : undefined,
       },
@@ -44,8 +76,20 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     );
 
     return (
-      <label className={cn(styles.root, styles[size], isDisabled && styles.disabled)}>
-        <input {...inputProps} ref={ref} className={styles.input} />
+      <label className={cn(styles.root, styles[size], resolvedIsDisabled && styles.disabled)}>
+        <input
+          {...inputProps}
+          onChange={(event) => {
+            inputProps.onChange?.(event);
+            onChange?.(event);
+          }}
+          onBlur={(event) => {
+            inputProps.onBlur?.(event);
+            onBlur?.(event);
+          }}
+          ref={ref}
+          className={styles.input}
+        />
         <span aria-hidden="true" className={cn(styles.box, state.isSelected && styles.checked)}>
           {isIndeterminate ? '−' : state.isSelected ? '✓' : ''}
         </span>

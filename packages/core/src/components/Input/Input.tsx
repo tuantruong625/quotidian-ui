@@ -4,10 +4,10 @@ import { cn } from '../../utils/cn';
 import { FieldWrapper } from '../FieldWrapper';
 import styles from './Input.module.css';
 
-export type InputProps = {
+export type InputProps = Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> & {
   id?: string;
   label?: React.ReactNode;
-  type?: 'password' | 'text' | 'email' | 'search';
+  type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   helperText?: string;
   errorMessage?: string;
@@ -39,6 +39,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       isRequired = false,
       isReadOnly = false,
       isInvalid = false,
+      disabled = false,
+      required = false,
+      readOnly = false,
       className,
       startIcon,
       endIcon,
@@ -46,6 +49,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       defaultValue,
       onChange,
+      onBlur,
+      name,
       ...rest
     },
     forwardedRef,
@@ -59,13 +64,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const internalRef = useRef<HTMLInputElement>(null);
     const ref = forwardedRef || internalRef;
 
+    const resolvedIsDisabled = isDisabled || disabled;
+    const resolvedIsRequired = isRequired || required;
+    const resolvedIsReadOnly = isReadOnly || readOnly;
+
     const { inputProps } = useTextField(
       {
         inputElementType: 'input',
         label,
-        isDisabled: isDisabled || isLoading,
-        isRequired,
-        isReadOnly,
+        isDisabled: resolvedIsDisabled || isLoading,
+        isRequired: resolvedIsRequired,
+        isReadOnly: resolvedIsReadOnly,
         validationState: isInvalid ? 'invalid' : 'valid',
       },
       ref as React.RefObject<HTMLInputElement>,
@@ -75,6 +84,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       inputProps.onChange?.(event);
       onChange?.(event);
     };
+    const handleBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
+      inputProps.onBlur?.(event);
+      onBlur?.(event);
+    };
 
     return (
       <FieldWrapper
@@ -82,9 +95,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         label={label}
         helperText={helperText}
         errorMessage={errorMessage}
-        isRequired={isRequired}
-        isDisabled={isDisabled}
-        isReadOnly={isReadOnly}
+        isRequired={resolvedIsRequired}
+        isDisabled={resolvedIsDisabled}
+        isReadOnly={resolvedIsReadOnly}
         isInvalid={isInvalid}
         size={size}
       >
@@ -96,9 +109,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...inputProps}
             id={id}
             type={type}
+            name={name}
             value={value}
             defaultValue={defaultValue}
             onChange={handleChange}
+            onBlur={handleBlur}
             aria-invalid={isInvalid || undefined}
             aria-describedby={describedBy}
             placeholder={placeholder}

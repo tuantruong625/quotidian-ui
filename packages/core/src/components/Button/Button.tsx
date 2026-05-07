@@ -12,6 +12,7 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonOwnProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -30,6 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       as,
       variant = 'primary',
       size = 'md',
+      type = 'button',
       isLoading = false,
       isDisabled = false,
       leftIcon,
@@ -49,6 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onPress,
         isDisabled: isDisabled || isLoading,
         elementType: as || 'button',
+        type: (as || 'button') === 'button' ? type : undefined,
       },
       ref as React.RefObject<HTMLButtonElement>,
     );

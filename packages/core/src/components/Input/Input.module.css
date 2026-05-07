@@ -10,6 +10,11 @@
     border-color 150ms ease;
 }
 
+.root::placeholder {
+  color: var(--color-semantic-text-secondary);
+  opacity: 1;
+}
+
 .root:focus-visible {
   outline: none;
   box-shadow:
@@ -42,6 +47,14 @@
 .loading {
   opacity: 0.72;
   cursor: not-allowed;
+}
+
+.root:-webkit-autofill,
+.root:-webkit-autofill:hover,
+.root:-webkit-autofill:focus-visible {
+  -webkit-text-fill-color: var(--color-semantic-text-primary);
+  box-shadow: 0 0 0 1000px var(--color-semantic-surface-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .spinner {

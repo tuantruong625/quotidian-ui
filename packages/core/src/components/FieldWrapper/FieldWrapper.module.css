@@ -29,6 +29,8 @@
 .message {
   margin: 0;
   font-size: 0.875em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
   color: var(--color-semantic-text-secondary);
 }
 

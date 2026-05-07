@@ -14,23 +14,44 @@ const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
 
 export type RadioGroupProps = {
   label?: React.ReactNode;
+  name?: string;
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  isRequired?: boolean;
+  required?: boolean;
   isDisabled?: boolean;
+  disabled?: boolean;
   children: React.ReactNode;
 };
 
 export function RadioGroup({
   label,
+  name,
   value,
   defaultValue,
   onChange,
+  isRequired = false,
+  required = false,
   isDisabled,
+  disabled = false,
   children,
 }: RadioGroupProps) {
-  const state = useRadioGroupState({ label, value, defaultValue, onChange, isDisabled });
-  const { radioGroupProps, labelProps } = useRadioGroup({ label, isDisabled }, state);
+  const resolvedIsDisabled = isDisabled || disabled;
+  const resolvedIsRequired = isRequired || required;
+  const state = useRadioGroupState({
+    label,
+    name,
+    value,
+    defaultValue,
+    onChange,
+    isDisabled: resolvedIsDisabled,
+    isRequired: resolvedIsRequired,
+  });
+  const { radioGroupProps, labelProps } = useRadioGroup(
+    { label, name, isDisabled: resolvedIsDisabled, isRequired: resolvedIsRequired },
+    state,
+  );
 
   return (
     <div {...radioGroupProps} className={styles.group}>
@@ -39,7 +60,7 @@ export function RadioGroup({
           {label}
         </span>
       )}
-      <RadioGroupContext.Provider value={{ state, isDisabled }}>
+      <RadioGroupContext.Provider value={{ state, isDisabled: resolvedIsDisabled }}>
         {children}
       </RadioGroupContext.Provider>
     </div>
