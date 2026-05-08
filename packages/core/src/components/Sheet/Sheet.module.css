@@ -1,0 +1,180 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.underlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-primitive-ink-900);
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .underlay {
+    opacity: 0;
+    animation: sheetUnderlayIn 220ms ease forwards;
+  }
+}
+
+.positioner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.positioner--right {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.positioner--left {
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.positioner--top {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.positioner--bottom {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.panel {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  border: 1px solid var(--color-semantic-border-default);
+  background: var(--color-semantic-bg-primary);
+  color: var(--color-semantic-text-primary);
+  box-shadow: var(--elevation-4);
+}
+
+.panel--right,
+.panel--left {
+  width: min(100%, 22rem);
+  height: 100%;
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+
+.panel--left {
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+
+.panel--top,
+.panel--bottom {
+  width: 100%;
+  max-height: min(90dvh, 28rem);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.panel--top {
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.panel--bottom {
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel--right {
+    animation: sheetInFromRight 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .panel--left {
+    animation: sheetInFromLeft 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .panel--top {
+    animation: sheetInFromTop 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .panel--bottom {
+    animation: sheetInFromBottom 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes sheetUnderlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.35;
+  }
+}
+
+@keyframes sheetInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sheetInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sheetInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sheetInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-semantic-border-default);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.titleSpacer {
+  flex: 1;
+}
+
+.body {
+  padding: var(--space-4);
+  overflow: auto;
+}

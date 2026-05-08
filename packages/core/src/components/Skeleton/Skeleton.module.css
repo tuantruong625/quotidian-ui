@@ -1,0 +1,40 @@
+.root {
+  display: block;
+  background: var(--color-semantic-border-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.root::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--color-semantic-bg-primary), transparent);
+  animation: shimmer 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root::after {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.line {
+  border-radius: var(--radius-sm);
+}
+
+.block {
+  border-radius: var(--radius-md);
+}
+
+.circle {
+  border-radius: var(--radius-full);
+}
