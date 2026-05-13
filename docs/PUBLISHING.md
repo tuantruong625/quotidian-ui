@@ -21,7 +21,7 @@ npm rejects republishing an existing version. Before any publish:
    - `packages/core/package.json` → `"version"`
 2. Commit and push.
 
-**Helper:** from the repo root (requires [jq](https://jqlang.github.io/jq/)):
+**Helper:** from the repo root (requires [jq](https://jqlang.github.io/jq/)). When using pnpm, it passes a literal `--` into the script; the script skips that so the version argument is read correctly.
 
 ```bash
 ./scripts/bump-and-tag.sh 0.2.0

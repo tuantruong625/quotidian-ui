@@ -3,7 +3,11 @@ set -euo pipefail
 
 # Bumps version in tokens + core, commits, and creates annotated tag v<semver>.
 # Usage: ./scripts/bump-and-tag.sh 0.2.0
-#        pnpm release:bump -- 0.2.0
+#        pnpm release:bump -- 0.2.0   (pnpm forwards a literal "--" as $1; we skip it)
+
+while [[ $# -gt 0 && "$1" == "--" ]]; do
+  shift
+done
 
 NEW_VERSION="${1:?Usage: $0 <semver>  e.g. 0.2.0}"
 
