@@ -13,7 +13,8 @@
     "format:check": "prettier --check packages/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release:bump": "bash scripts/bump-and-tag.sh"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

@@ -37,6 +37,8 @@ quotidian-ui/
 │   │
 │   └── docs/                # Documentation site (future)
 │
+├── docs/                    # Maintainer docs (e.g. publishing)
+├── scripts/                 # Release helpers
 ├── .storybook/              # Storybook configuration
 ├── turbo.json               # Turborepo task config
 └── pnpm-workspace.yaml      # Workspace config
@@ -110,15 +112,11 @@ export interface YourComponentProps {
 export const YourComponent = forwardRef<HTMLDivElement, YourComponentProps>(
   ({ variant = 'default', className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn(styles.root, styles[variant], className)}
-        {...props}
-      >
+      <div ref={ref} className={cn(styles.root, styles[variant], className)} {...props}>
         {children}
       </div>
     );
-  }
+  },
 );
 
 YourComponent.displayName = 'YourComponent';
@@ -211,9 +209,7 @@ describe('YourComponent', () => {
   });
 
   it('merges custom className', () => {
-    const { container } = render(
-      <YourComponent className="custom">Hello</YourComponent>
-    );
+    const { container } = render(<YourComponent className="custom">Hello</YourComponent>);
     expect(container.firstChild).toHaveClass('custom');
   });
 });
@@ -295,12 +291,12 @@ Components only consume semantic tokens. This enables theming — in dark mode, 
 
 ### Token files
 
-| File | Contains |
-|------|----------|
-| `colors.json` | Color primitives and semantic color aliases |
-| `spacing.json` | Spacing scale (4px base unit) |
+| File              | Contains                                    |
+| ----------------- | ------------------------------------------- |
+| `colors.json`     | Color primitives and semantic color aliases |
+| `spacing.json`    | Spacing scale (4px base unit)               |
 | `typography.json` | Font families, weights, sizes, line heights |
-| `elevation.json` | Box shadows, border radius, transitions |
+| `elevation.json`  | Box shadows, border radius, transitions     |
 
 ### Adding a new token
 
@@ -354,11 +350,11 @@ pnpm turbo build --filter @quotidian-ui/tokens
 
 Style Dictionary generates:
 
-| Output | Location | Usage |
-|--------|----------|-------|
-| CSS custom properties | `build/css/variables.css` | Imported in Storybook and consumer apps |
-| JavaScript constants | `build/js/tokens.js` | For token values needed in JS logic |
-| TypeScript declarations | `build/js/tokens.d.ts` | Type safety for JS token usage |
+| Output                  | Location                  | Usage                                   |
+| ----------------------- | ------------------------- | --------------------------------------- |
+| CSS custom properties   | `build/css/variables.css` | Imported in Storybook and consumer apps |
+| JavaScript constants    | `build/js/tokens.js`      | For token values needed in JS logic     |
+| TypeScript declarations | `build/js/tokens.d.ts`    | Type safety for JS token usage          |
 
 ---
 
@@ -373,7 +369,7 @@ The `ThemeProvider` sets a `data-theme` attribute on the document root. Semantic
   --color-semantic-bg-primary: #ffffff;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --color-semantic-bg-primary: #111827;
 }
 ```
@@ -400,37 +396,40 @@ Options for `defaultTheme`: `'light'` | `'dark'` | `'system'`
 
 ## Common Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm install` | Install all dependencies |
-| `pnpm turbo build` | Build all packages (tokens → core → docs) |
-| `pnpm turbo build --filter @quotidian-ui/tokens` | Build tokens only |
-| `pnpm turbo build --filter @quotidian-ui/core` | Build core only |
-| `pnpm turbo test` | Run all tests |
-| `pnpm storybook` | Start Storybook dev server |
-| `cd packages/core && pnpm test:watch` | Watch mode tests for core |
+| Command                                          | Description                                                                                |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `pnpm install`                                   | Install all dependencies                                                                   |
+| `pnpm turbo build`                               | Build all packages (tokens → core → docs)                                                  |
+| `pnpm turbo build --filter @quotidian-ui/tokens` | Build tokens only                                                                          |
+| `pnpm turbo build --filter @quotidian-ui/core`   | Build core only                                                                            |
+| `pnpm turbo test`                                | Run all tests                                                                              |
+| `pnpm storybook`                                 | Start Storybook dev server                                                                 |
+| `cd packages/core && pnpm test:watch`            | Watch mode tests for core                                                                  |
+| `pnpm release:bump -- 0.2.0`                     | Bump `tokens` + `core` version, commit, tag (see [docs/PUBLISHING.md](docs/PUBLISHING.md)) |
 
 ---
 
 ## Architecture Decisions
 
-| Decision | Choice | Why |
-|----------|--------|-----|
-| Package manager | pnpm | Workspace protocol, strict `node_modules`, industry standard for DS |
-| Monorepo tool | Turborepo | Dependency-aware builds, caching, lightweight config |
-| Styling | CSS Modules | Zero runtime, scoped classes, full CSS control |
-| Accessibility | React Aria | Hook-based primitives, you own the markup and styling |
-| Token pipeline | Style Dictionary | Industry standard, multi-platform output, DTCG compatible |
-| Token format | DTCG (`$value`) | Emerging W3C standard the industry is converging on |
-| Bundler | Vite (library mode) | Rollup under the hood, tree-shakeable ESM output |
-| Testing | Vitest + RTL | Shares Vite config, fast, user-perspective testing |
-| Documentation | Storybook | Visual development, interactive props, built-in a11y audits |
+| Decision        | Choice              | Why                                                                 |
+| --------------- | ------------------- | ------------------------------------------------------------------- |
+| Package manager | pnpm                | Workspace protocol, strict `node_modules`, industry standard for DS |
+| Monorepo tool   | Turborepo           | Dependency-aware builds, caching, lightweight config                |
+| Styling         | CSS Modules         | Zero runtime, scoped classes, full CSS control                      |
+| Accessibility   | React Aria          | Hook-based primitives, you own the markup and styling               |
+| Token pipeline  | Style Dictionary    | Industry standard, multi-platform output, DTCG compatible           |
+| Token format    | DTCG (`$value`)     | Emerging W3C standard the industry is converging on                 |
+| Bundler         | Vite (library mode) | Rollup under the hood, tree-shakeable ESM output                    |
+| Testing         | Vitest + RTL        | Shares Vite config, fast, user-perspective testing                  |
+| Documentation   | Storybook           | Visual development, interactive props, built-in a11y audits         |
 
 ---
 
-## Publishing (future)
+## Publishing
 
-The library will be published to npm as scoped packages:
+See **[docs/PUBLISHING.md](docs/PUBLISHING.md)** for versioning, GitHub Actions (`NPM_TOKEN`), and the `scripts/bump-and-tag.sh` helper.
+
+Published npm packages:
 
 - `@quotidian-ui/tokens` — Design tokens (CSS + JS)
 - `@quotidian-ui/core` — React component library
