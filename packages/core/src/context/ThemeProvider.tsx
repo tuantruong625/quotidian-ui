@@ -1,5 +1,6 @@
 import { createContext, useContext, useCallback, useMemo, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { I18nProvider } from 'react-aria';
 
 type Theme = 'light' | 'dark' | 'system';
 type ResolvedTheme = 'light' | 'dark';
@@ -20,11 +21,21 @@ const getSystemTheme = (): ResolvedTheme => {
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: Theme;
+  /** BCP 47 locale for `I18nProvider` (number and date fields). Defaults to `en-US` on the server and `navigator.language` in the browser. */
+  locale?: string;
 }
 
-export const ThemeProvider = ({ children, defaultTheme = 'system' }: ThemeProviderProps) => {
+export const ThemeProvider = ({
+  children,
+  defaultTheme = 'system',
+  locale: localeProp,
+}: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(getSystemTheme);
+
+  const resolvedLocale =
+    localeProp ??
+    (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en-US');
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -50,7 +61,11 @@ export const ThemeProvider = ({ children, defaultTheme = 'system' }: ThemeProvid
     [theme, resolvedTheme, handleSetTheme],
   );
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <I18nProvider locale={resolvedLocale}>
+      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    </I18nProvider>
+  );
 };
 
 export const useTheme = () => {

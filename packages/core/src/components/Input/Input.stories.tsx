@@ -5,6 +5,14 @@ import { Input } from './Input';
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Plain text via `useTextField`. For numbers, currency, or spinbutton semantics, use **NumberField** (`useNumberField`) instead of `type="number"`.',
+      },
+    },
+  },
   argTypes: {
     size: {
       control: 'select',

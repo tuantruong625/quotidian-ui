@@ -59,7 +59,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         name,
         value,
         isDisabled: resolvedIsDisabled,
-        isRequired: required,
         children: typeof label === 'string' ? label : undefined,
         'aria-label': ariaLabel,
       },
@@ -71,6 +70,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       <label className={cn(styles.root, styles[size], resolvedIsDisabled && styles.disabled)}>
         <input
           {...inputProps}
+          required={required}
           onChange={(event) => {
             inputProps.onChange?.(event);
             onChange?.(event);

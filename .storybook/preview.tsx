@@ -1,4 +1,5 @@
 import '../packages/tokens/build/css/variables.css';
+import { I18nProvider } from 'react-aria';
 
 const preview = {
   globalTypes: {
@@ -24,7 +25,11 @@ const preview = {
       } else {
         document.documentElement.removeAttribute('data-theme');
       }
-      return Story();
+      return (
+        <I18nProvider locale={typeof navigator !== 'undefined' ? navigator.language : 'en-US'}>
+          {Story()}
+        </I18nProvider>
+      );
     },
   ],
   parameters: {

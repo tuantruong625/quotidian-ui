@@ -1,0 +1,123 @@
+.field {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  gap: var(--space-1);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-semantic-border-default);
+  background: var(--color-semantic-surface-primary);
+  color: var(--color-semantic-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.input::placeholder {
+  color: var(--color-semantic-text-secondary);
+  opacity: 1;
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-semantic-border-focus),
+    0 0 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.field.sm .input {
+  padding: 0.25rem 1rem;
+  font-size: var(--font-size-sm);
+}
+
+.field.md .input {
+  padding: 0.5rem 1rem;
+}
+
+.field.lg .input {
+  padding: 0.75rem 1rem;
+  font-size: var(--font-size-lg);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--color-primitive-red-500);
+}
+
+.input:disabled,
+.loading {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.step {
+  flex-shrink: 0;
+  align-self: stretch;
+  min-width: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-semantic-text-primary);
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  outline: none;
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+
+.step:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--color-semantic-bg-secondary);
+}
+
+.step:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-semantic-bg-primary),
+    0 0 0 4px var(--color-semantic-border-focus);
+}
+
+.step:disabled,
+.step[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.5em;
+  height: 0.5em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 1000ms linear infinite;
+  color: var(--color-semantic-action-primary-default);
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.fieldWrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.loading .fieldWrap .input {
+  padding-right: 2rem;
+}

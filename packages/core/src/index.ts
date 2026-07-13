@@ -29,10 +29,27 @@ export { Progress } from './components/Progress';
 export type { ProgressProps } from './components/Progress';
 export { Slider } from './components/Slider';
 export type { SliderProps } from './components/Slider';
+export { NumberField } from './components/NumberField';
+export type { NumberFieldProps } from './components/NumberField';
 export { Dialog } from './components/Dialog';
 export type { DialogProps } from './components/Dialog';
 export { Sheet } from './components/Sheet';
 export type { SheetProps } from './components/Sheet';
+export { Tabs, TabList, Tab, TabPanel } from './components/Tabs';
+export type {
+  TabsProps,
+  TabListProps,
+  TabComponentProps,
+  TabPanelProps,
+  TabDefinition,
+} from './components/Tabs';
+export { ToastProvider, ToastRegion, defaultToastQueue, pushToast } from './components/Toast';
+export type {
+  ToastContent,
+  ToastOptions,
+  ToastProviderProps,
+  ToastRegionProps,
+} from './components/Toast';
 
 // Context
 export { ThemeProvider, useTheme } from './context/ThemeProvider';

@@ -10,7 +10,28 @@ Published packages:
 ## Prerequisites
 
 - **npm org** `@quotidian-ui` with permission to publish both packages.
-- **GitHub secret** `NPM_TOKEN` on this repository: an npm token with publish access (automation or granular token).
+- **GitHub secret** `NPM_TOKEN`: must be a token that can publish **without** a one-time password in CI.
+
+### Which npm token to use
+
+If your npm account has **2FA** enabled (recommended), a classic **“Publish”** token still makes `npm publish` ask for an OTP — GitHub Actions cannot answer that, and you will see **`EOTP`** / _“requires a one-time password”_.
+
+Use one of these instead:
+
+1. **Classic → “Automation”**  
+   [npmjs.com](https://www.npmjs.com/) → **Access Tokens** → **Generate New Token** → **Classic** → choose type **Automation**.  
+   Automation tokens are meant for CI and can publish when 2FA is on.
+
+2. **Granular Access Token**  
+   Generate a granular token with **Write** (or publish) permission on packages `@quotidian-ui/tokens` and `@quotidian-ui/core` (or the whole org, if you prefer).
+
+Then in GitHub: **Settings → Secrets and variables → Actions** → create or update **`NPM_TOKEN`** with that token value (no `npm_` prefix required in the secret name; the workflow reads `secrets.NPM_TOKEN` as `NODE_AUTH_TOKEN`).
+
+## Troubleshooting
+
+### `EOTP` / “This operation requires a one-time password”
+
+Your `NPM_TOKEN` is almost certainly the wrong token type (often a **Publish** classic token). Replace it with an **Automation** classic token or a **granular** token with publish access, then re-run **Publish Packages**.
 
 ## Version bump (required)
 

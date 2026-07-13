@@ -1,23 +1,27 @@
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { cn } from '../../utils/cn';
 import styles from './FieldWrapper.module.css';
 
 export type FieldWrapperProps = {
   id?: string;
-  label?: React.ReactNode;
-  helperText?: React.ReactNode;
-  errorMessage?: React.ReactNode;
+  label?: ReactNode;
+  /** Merged onto the visible `<label>` when `label` is set (e.g. React Aria `labelProps`). */
+  labelProps?: Omit<ComponentPropsWithoutRef<'label'>, 'children'>;
+  helperText?: ReactNode;
+  errorMessage?: ReactNode;
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
   isInvalid?: boolean;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function FieldWrapper({
   id,
   label,
+  labelProps,
   helperText,
   errorMessage,
   isRequired = false,
@@ -42,7 +46,11 @@ export function FieldWrapper({
       data-describedby={describedBy}
     >
       {label && (
-        <label className={styles.label} htmlFor={id}>
+        <label
+          {...labelProps}
+          htmlFor={id ?? labelProps?.htmlFor}
+          className={cn(styles.label, labelProps?.className)}
+        >
           {label}
           {isRequired && (
             <span className={styles.required} aria-hidden="true">
