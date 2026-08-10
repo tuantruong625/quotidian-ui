@@ -298,6 +298,8 @@ Components only consume semantic tokens. This enables theming — in dark mode, 
 | `typography.json` | Font families, weights, sizes, line heights |
 | `elevation.json`  | Box shadows, border radius, transitions     |
 
+Sans UI text uses **Noto Sans** via `--font-family-sans`. The packages set the CSS variable only — load Noto Sans (weights 400–700) in your app (for example from [Google Fonts](https://fonts.google.com/specimen/Noto+Sans)). Storybook loads it for local previews.
+
 ### Adding a new token
 
 1. Add the token to the appropriate JSON file in `packages/tokens/src/`:

@@ -1,3 +1,4 @@
+import './fonts.css';
 import '../packages/tokens/build/css/variables.css';
 import { I18nProvider } from 'react-aria';
 
